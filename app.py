@@ -4,8 +4,12 @@ Built for the Codebasics AI Engineering Cohort Assignment.
 Uses Groq API with robust prompt engineering and error handling.
 """
 import os
+import importlib
 import streamlit as st
 from dotenv import load_dotenv
+
+import planner.generator
+importlib.reload(planner.generator)
 
 from planner.models import FITNESS_GOALS, EXPERIENCE_LEVELS, EQUIPMENT_OPTIONS
 from planner.generator import generate_workout_plan, get_available_models, DEFAULT_MODEL
