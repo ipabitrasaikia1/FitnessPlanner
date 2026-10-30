@@ -70,3 +70,4 @@ Please structure your response into the following clear sections:
    - Cool-down & Mobility (3 minutes)
 4. **Safety & Injury Notes**: Specific callouts on how this plan accommodates "{limitations_text}" (if applicable) and a brief standard safety disclaimer.
 """
+

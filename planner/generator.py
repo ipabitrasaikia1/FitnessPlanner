@@ -1,6 +1,6 @@
 """Core module for generating workout plans via Groq API."""
 import os
-from typing import Optional, Tuple
+from typing import Optional, Tuple, List
 from dotenv import load_dotenv
 from groq import Groq, AuthenticationError, RateLimitError, APIConnectionError, APIStatusError, GroqError
 
@@ -10,7 +10,38 @@ from .prompts import SYSTEM_PROMPT, build_user_prompt
 # Load environment variables from .env if present
 load_dotenv()
 
-DEFAULT_MODEL: str = "llama-3.3-70b-versatile"
+FALLBACK_MODELS: List[str] = [
+    "openai/gpt-oss-120b",
+    "openai/gpt-oss-20b",
+    "qwen/qwen3.8-27b",
+]
+
+DEFAULT_MODEL: str = FALLBACK_MODELS[0]
+
+
+def get_available_models(api_key: Optional[str] = None) -> List[str]:
+    """Dynamically fetches active chat models available to the Groq API key.
+
+    Falls back to a verified list if key is missing or call fails.
+    """
+    resolved_key = (api_key or "").strip() or os.getenv("GROQ_API_KEY", "").strip()
+    if not resolved_key:
+        return FALLBACK_MODELS
+
+    try:
+        client = Groq(api_key=resolved_key)
+        response = client.models.list()
+        
+        # Exclude audio and guard models that cannot be used for chat completion
+        excluded_keywords = ["whisper", "prompt-guard", "safeguard", "orpheus"]
+        chat_models = [
+            m.id for m in response.data
+            if not any(kw in m.id.lower() for kw in excluded_keywords)
+        ]
+        
+        return chat_models if chat_models else FALLBACK_MODELS
+    except Exception:
+        return FALLBACK_MODELS
 
 
 def generate_workout_plan(
@@ -52,7 +83,10 @@ def generate_workout_plan(
         return False, f"⚠️ **Invalid Input**: {validation_error}"
 
     # 2. API Key Retrieval & Validation
-    resolved_api_key = api_key.strip() if api_key and api_key.strip() else os.getenv("GROQ_API_KEY", "").strip()
+    if api_key is not None:
+        resolved_api_key = api_key.strip()
+    else:
+        resolved_api_key = os.getenv("GROQ_API_KEY", "").strip()
     if not resolved_api_key:
         return (
             False,
@@ -131,3 +165,4 @@ def generate_workout_plan(
             f"⚠️ **Unexpected Error**: An unexpected issue occurred ({type(e).__name__}: {str(e)}). "
             "Please check your inputs and try again.",
         )
+

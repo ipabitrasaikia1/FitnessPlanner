@@ -47,3 +47,4 @@ class WorkoutPreferences:
             return f"Please select equipment access from: {', '.join(EQUIPMENT_OPTIONS)}."
 
         return None
+

@@ -107,3 +107,4 @@ python3 -m unittest discover tests/
 | **Error Handling** | 15% | Catches `AuthenticationError`, `RateLimitError`, `APIConnectionError`, `APIStatusError`, and malformed/empty response cases. |
 | **Code Quality** | 10% | Strict type hints, modular package architecture, PEP-8 compliance, and comprehensive unit tests. |
 | **Stretch Goals** | Bonus | `st.session_state` persistence, "Regenerate Variation" button, and `.md` file download. |
+

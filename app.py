@@ -8,7 +8,7 @@ import streamlit as st
 from dotenv import load_dotenv
 
 from planner.models import FITNESS_GOALS, EXPERIENCE_LEVELS, EQUIPMENT_OPTIONS
-from planner.generator import generate_workout_plan, DEFAULT_MODEL
+from planner.generator import generate_workout_plan, get_available_models, DEFAULT_MODEL
 
 # Load .env variables
 load_dotenv()
@@ -75,15 +75,13 @@ with st.sidebar:
     if not api_key_input:
         st.info("💡 Get a free Groq API key at [console.groq.com/keys](https://console.groq.com/keys)")
 
+    available_models = get_available_models(api_key_input)
+    default_index = 0
     model_option = st.selectbox(
         "Groq Model",
-        options=[
-            "llama-3.3-70b-versatile",
-            "llama-3.1-8b-instant",
-            "mixtral-8x7b-32768",
-        ],
-        index=0,
-        help="Llama-3.3-70B provides optimal constraint following and depth.",
+        options=available_models,
+        index=default_index,
+        help="Select any available LLM from your Groq account.",
     )
 
     st.markdown("---")
@@ -223,3 +221,4 @@ if st.session_state.workout_plan:
         file_name=plan_filename,
         mime="text/markdown",
     )
+
