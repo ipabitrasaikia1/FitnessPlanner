@@ -1,8 +1,10 @@
 # 🏋️‍♂️ AI Personalized Workout Plan Generator
 
-An intelligent, interactive Streamlit application that collects structured user fitness preferences and leverages the **Groq API** (powered by `llama-3.3-70b-versatile`) to generate safe, personalized, and highly usable weekly workout plans.
+An intelligent, interactive Streamlit application that collects structured user fitness preferences and leverages the **Groq API** to generate safe, personalized, and highly usable weekly workout plans.
 
 Built for the **Codebasics AI Engineering Cohort - Assignment 1**.
+
+🌐 **Live Application**: [https://fitnessplanner-ebmvjdwk9adqyyzpptcxtp.streamlit.app/](https://fitnessplanner-ebmvjdwk9adqyyzpptcxtp.streamlit.app/)
 
 ---
 
@@ -26,7 +28,7 @@ This project emphasizes **thoughtful prompt engineering, strict constraint adher
 | **Session State Persistence** | Generated plans persist across page reloads and parameter adjustments via `st.session_state`. |
 | **Regenerate Variation** | Generate an alternative routine while respecting the same profile constraints. |
 | **Export Routine** | One-click download of the complete workout plan as a `.md` markdown file. |
-| **Sidebar Configuration** | Interactive Groq API key configuration and model selection (`llama-3.3-70b-versatile`, `llama-3.1-8b-instant`, etc.). |
+| **Sidebar Configuration** | Interactive Groq API key configuration and dynamic model discovery (`openai/gpt-oss-120b`, `qwen/qwen3.8-27b`, etc.). |
 
 ---
 
