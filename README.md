@@ -4,7 +4,9 @@ An intelligent, interactive Streamlit application that collects structured user 
 
 Built for the **Codebasics AI Engineering Cohort - Assignment 1**.
 
-🌐 **Live Application**: <a href="https://fitnessplanner-ebmvjdwk9adqyyzpptcxtp.streamlit.app/" target="_blank" rel="noopener noreferrer">https://fitnessplanner-ebmvjdwk9adqyyzpptcxtp.streamlit.app/</a>
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://fitnessplanner-ebmvjdwk9adqyyzpptcxtp.streamlit.app/)
+
+🌐 **Live Application**: [https://fitnessplanner-ebmvjdwk9adqyyzpptcxtp.streamlit.app/](https://fitnessplanner-ebmvjdwk9adqyyzpptcxtp.streamlit.app/) *(Tip: `Cmd + Click` or `Ctrl + Click` to open in a new tab)*
 
 ---
 
